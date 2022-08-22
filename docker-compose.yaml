@@ -1,0 +1,28 @@
+networks:
+  bridge-sandro:
+    driver: bridge
+
+services:
+  web:
+    image: nginx
+    container_name: "nginx"
+    ports:
+      - "8080:80"
+    environment:
+      - NGINX_HOST=st.com
+      - NGINX_PORT=80
+    networks:
+      - bridge-sandro
+  db:
+    image: mysql
+    container_name: "mysql"
+    ports:
+      - "3306:3306"
+    restart: always
+    environment:
+      MYSQL_DATABASE: st_db
+      MYSQL_USER: st_db
+      MYSQL_PASSWORD: 123456
+      MYSQL_ROOT_PASSWORD: root
+    networks:
+      - bridge-sandro
